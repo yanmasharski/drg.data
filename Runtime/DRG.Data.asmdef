@@ -1,0 +1,17 @@
+{
+    "name": "DRG.Data",
+    "rootNamespace": "DRG.Data",
+    "references": [
+        "DRG.Core",
+        "DRG.Utils"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
