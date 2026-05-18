@@ -1,7 +1,10 @@
 namespace DRG.Data
 {
+    using DRG.Core;
+    using DRG.Core.Logs;
     using DRG.Utils;
     using UnityEngine;
+    using ILogger = DRG.Core.Logs.ILogger;
 
     /// <summary>
     /// DataProviderPlayerPrefs is a class that provides a way to store and retrieve data using PlayerPrefs.
@@ -10,13 +13,17 @@ namespace DRG.Data
     public class DataProviderPlayerPrefs : IDataProvider
     {
         private readonly bool threadSafe;
+        private readonly ILogger logger;
+        private readonly IMainThreadDispatcher mainThreadDispatcher;
 
-        public DataProviderPlayerPrefs(bool threadSafe = false)
+        public DataProviderPlayerPrefs(ILogger logger, IMainThreadDispatcher mainThreadDispatcher, bool threadSafe = false)
         {
 #if UNITY_IOS
             System.Environment.SetEnvironmentVariable("MONO_REFLECTION_SERIALIZER", "yes");
 #endif
             this.threadSafe = threadSafe;
+            this.logger = logger;
+            this.mainThreadDispatcher = mainThreadDispatcher;
         }
 
         public int GetInt(string key, int defaultValue) => PlayerPrefs.GetInt(key, defaultValue);
@@ -26,25 +33,25 @@ namespace DRG.Data
 
         public void SetInt(string key, int value)
         {
-            if (threadSafe) MainThreadDispatcher.Enqueue(() => PlayerPrefs.SetInt(key, value));
+            if (threadSafe) mainThreadDispatcher.Dispatch(() => PlayerPrefs.SetInt(key, value));
             else PlayerPrefs.SetInt(key, value);
         }
 
         public void SetFloat(string key, float value)
         {
-            if (threadSafe) MainThreadDispatcher.Enqueue(() => PlayerPrefs.SetFloat(key, value));
+            if (threadSafe) mainThreadDispatcher.Dispatch(() => PlayerPrefs.SetFloat(key, value));
             else PlayerPrefs.SetFloat(key, value);
         }
 
         public void SetString(string key, string value)
         {
-            if (threadSafe) MainThreadDispatcher.Enqueue(() => PlayerPrefs.SetString(key, value));
+            if (threadSafe) mainThreadDispatcher.Dispatch(() => PlayerPrefs.SetString(key, value));
             else PlayerPrefs.SetString(key, value);
         }
 
         public void SetBool(string key, bool value)
         {
-            if (threadSafe) MainThreadDispatcher.Enqueue(() => PlayerPrefs.SetInt(key, value ? 1 : 0));
+            if (threadSafe) mainThreadDispatcher.Dispatch(() => PlayerPrefs.SetInt(key, value ? 1 : 0));
             else PlayerPrefs.SetInt(key, value ? 1 : 0);
         }
 

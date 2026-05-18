@@ -4,8 +4,8 @@ namespace DRG.Data
     using System.Collections;
     using System.Collections.Generic;
     using DRG.Utils;
-    using DRG.Serialization;
-    using ILogger = DRG.Logs.ILogger;
+    using DRG.Data.Serialization;
+    using ILogger = DRG.Core.Logs.ILogger;
 
     /// <summary>
     /// High-performance wrapper around Unity's PlayerPrefs with in-memory caching and dirty tracking.

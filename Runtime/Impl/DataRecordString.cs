@@ -1,6 +1,6 @@
 namespace DRG.Data
 {
-    using DRG.Logs;
+    using DRG.Core.Logs;
 
     public sealed class DataRecordString : ITypedDataRecord<string>
     {

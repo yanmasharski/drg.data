@@ -1,4 +1,4 @@
-namespace DRG.Serialization
+namespace DRG.Data.Serialization
 {
     using System;
     using UnityEngine;

@@ -1,7 +1,7 @@
 namespace DRG.Data
 {
     using System;
-    using DRG.Serialization;
+    using DRG.Data.Serialization;
 
     public sealed class DataRecordObject : ITypedDataRecord<object>
     {

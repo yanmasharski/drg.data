@@ -1,6 +1,6 @@
 namespace DRG.Data
 {
-    using DRG.Serialization;
+    using DRG.Data.Serialization;
 
     public interface IDataStorage
     {
